@@ -14,6 +14,12 @@ notify('Operación realizada con éxito')
 
 // Notificación de error
 notify('Hubo un problema al guardar', 'error')
+
+// para usarse en la mayoria de casos
+notify('Datos guardados correctamente', 'positive')
+notify('Su sesión expirará pronto', 'info')
+notify('Este registro ya existe', 'warning')
+notify('Error fatal: El archivo es demasiado grande', 'negative')
 ```
 
 ---
@@ -65,3 +71,4 @@ notify('¿Borrar archivo?', 'question', {
 1. **Responsive**: La notificación cambia de posición automáticamente. En móviles aparece abajo (`bottom`) y en escritorio arriba a la derecha (`top-right`).
 2. **Botón de cierre**: Todas las notificaciones incluyen por defecto un botón `x` para cerrarlas manualmente.
 3. **Prioridad**: Si pasas un objeto en `extConfig`, este tiene prioridad sobre los valores automáticos de la función.
+

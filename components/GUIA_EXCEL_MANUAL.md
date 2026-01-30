@@ -84,3 +84,13 @@ const descargarExcel = async () => {
 2. **Backend**: Configurar las cabeceras `Content-Type` y `Content-Disposition`.
 3. **Frontend**: Usar `responseType: 'blob'` en la petición Axios.
 4. **Frontend**: Usar la función `download(blob, nombre)` de tu proyecto para manejar la descarga de forma multiplataforma.
+
+---
+
+### 💡 Nota Técnica: ¿Por qué usar `res.send()` y no solo `return`?
+
+En este proyecto, la mayoría de controladores usan `return` porque el Framework (el core de SiewebJS) envuelve tus métodos y hace el `res.json()` por ti automáticamente. Sin embargo, para archivos (como el Excel), el comportamiento es diferente:
+
+1. **Headers Especiales**: Necesitas un `Content-Disposition` para que el navegador sepa el nombre del archivo. Si solo haces `return buffer`, el framework enviará el archivo con el nombre por defecto y tipo `application/octet-stream`.
+2. **Detección del Core**: El core de tu proyecto (`utils-build.js`) tiene una validación inteligente: si detecta que la respuesta ya fue enviada (vía `res.send`) o que ya configuraste un header de descarga, **el framework no interviene** y deja que tu respuesta manual pase tal cual.
+3. **Seguridad**: Al llamar a `response.status(200).send(buffer)`, aseguras que el Framework no intente procesar los datos como un objeto JSON, evitando cualquier error de conversión que pudiera dañar el archivo binario.

@@ -1,0 +1,35 @@
+div.q-pa-md(v-if="!hasError")
+  q-card(flat bordered)
+    q-toolbar.bg-grey-2
+      sie-file-breadcrumbs(:ruta="rutaActual" @navigate="navegarBreadcrumb")
+      
+      div.col
+
+      sie-file-toolbar(
+        :can-go-back="rutaActual.length > 0"
+        :can-create-folder="canCreateFolder"
+        :can-upload="canUpload"
+        @create-folder="crearCarpetaAccion"
+        @upload="subirArchivoAccion"
+        @back="navegarAtras"
+        @refresh="init"
+      )
+
+    // Input oculto para subir archivos
+    input(
+      type="file"
+      ref="fileInput"
+      multiple
+      style="display: none"
+      @change="onFileSelected"
+    )
+
+    sie-file-list(
+      :data="listaArchivos"
+      :columns="columnasArchivos"
+      :rows-per-page="rowsPerPage"
+      :can-delete="canDelete"
+      @open="abrirCarpeta"
+      @delete="eliminarArchivo"
+      @download="descargarArchivo"
+    )

@@ -113,6 +113,15 @@ export default {
       if (row.type === 'folder') {
         return { name: 'folder', color: 'amber' }
       }
+      if (row.type === 'audio') {
+        return { name: 'audiotrack', color: 'orange' }
+      }
+      if (row.type === 'video') {
+        return { name: 'videocam', color: 'deep-orange' }
+      }
+      if (row.type === 'archive') {
+        return { name: 'archive', color: 'brown' }
+      }
       
       const name = row.name.toLowerCase()
       if (name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png') || name.endsWith('.gif')) {
@@ -127,8 +136,7 @@ export default {
       if (name.endsWith('.doc') || name.endsWith('.docx')) {
         return { name: 'article', color: 'blue' }
       }
-      
-      
+
       return { name: 'description', color: 'grey' }
     },
     formatDateCustom (val) {

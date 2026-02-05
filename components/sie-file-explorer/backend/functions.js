@@ -132,10 +132,16 @@ const getArchivosMapeados = (rutaCompletaCarpeta) => {
             item.children = getArchivosMapeados(rutaCompleta);
         } else {
             const ext = path.extname(nombreArchivo).toLowerCase();
-            if (['.jpg', '.jpeg', '.png', '.gif', '.svg'].includes(ext)) {
+            if (['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(ext)) {
                 item.type = 'img';
-            } else if (['.pdf', '.doc', '.docx', '.xls', '.xlsx'].includes(ext)) {
+            } else if (['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.txt', '.csv'].includes(ext)) {
                 item.type = 'doc';
+            } else if (['.mp3', '.wav', '.ogg', '.m4a', '.wma'].includes(ext)) {
+                item.type = 'audio';
+            } else if (['.mp4', '.avi', '.mkv', '.mov', '.webm', '.flv'].includes(ext)) {
+                item.type = 'video';
+            } else if (['.zip', '.rar', '.7z', '.tar', '.gz'].includes(ext)) {
+                item.type = 'archive';
             } else {
                 item.type = 'file';
             }

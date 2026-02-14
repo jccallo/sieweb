@@ -41,7 +41,7 @@ CREATE TABLE api_keys (
 );
 
 ```
-Mejorado
+Mejorado api_keys
 ```sql
 CREATE TABLE api_keys (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -86,4 +86,18 @@ CREATE TABLE api_keys (
     INDEX idx_expires_at (expires_at)
 );
 
+```
+
+api_key_rate_limits
+```sql
+CREATE TABLE api_key_rate_limits (
+    api_key_id BIGINT UNSIGNED PRIMARY KEY,
+    request_count INT UNSIGNED NOT NULL DEFAULT 0,
+    window_start DATETIME NOT NULL,
+
+    CONSTRAINT fk_rate_limit_api_key
+        FOREIGN KEY (api_key_id)
+        REFERENCES api_keys(id)
+        ON DELETE CASCADE
+);
 ```

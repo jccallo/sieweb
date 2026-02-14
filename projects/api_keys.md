@@ -130,3 +130,67 @@ CREATE TABLE api_keys (
 CREATE INDEX idx_owner ON api_keys(owner_type, owner_id);
 CREATE INDEX idx_active ON api_keys(is_active);
 ```
+
+propuesta de rate limit en memoria
+```ts
+// rate-limit.service.ts
+interface RateLimitData {
+  count: number;
+  windowEnd: number;
+}
+
+const limits = new Map<string, RateLimitData>();
+
+export class RateLimitService {
+  static defaultRateLimit = 100;          // Requests por ventana
+  static defaultWindowSeconds = 60;       // Duración ventana en segundos
+  static alertThreshold = 10_000;         // Alerta si supera req/min
+  static maxKeys = 50_000;                // Máximo de keys en memoria
+
+  /**
+   * Check rápido en memoria
+   */
+  static check(apiKey: string, rateLimit = RateLimitService.defaultRateLimit, windowSeconds = RateLimitService.defaultWindowSeconds): boolean {
+    const now = Date.now();
+    let data = limits.get(apiKey);
+
+    if (!data || now > data.windowEnd) {
+      data = { count: 1, windowEnd: now + windowSeconds * 1000 };
+      limits.set(apiKey, data);
+      RateLimitService.ensureMaxKeys();
+      return true;
+    }
+
+    if (data.count < rateLimit) {
+      data.count += 1;
+      RateLimitService.handleAlert(apiKey, data.count);
+      return true;
+    }
+
+    return false; // Límite superado
+  }
+
+  /**
+   * Manejo de alertas de tráfico extremo
+   */
+  private static handleAlert(apiKey: string, count: number) {
+    if (count > RateLimitService.alertThreshold) {
+      console.warn(`ALERTA: API key ${apiKey} superó ${RateLimitService.alertThreshold} req/min en este nodo`);
+    }
+  }
+
+  /**
+   * Limitar el tamaño del Map para no crecer indefinidamente
+   */
+  private static ensureMaxKeys() {
+    if (limits.size <= RateLimitService.maxKeys) return;
+
+    // Borrar keys más antiguas hasta reducir tamaño
+    const keys = Array.from(limits.keys());
+    const removeCount = limits.size - RateLimitService.maxKeys;
+    for (let i = 0; i < removeCount; i++) {
+      limits.delete(keys[i]);
+    }
+  }
+}
+```

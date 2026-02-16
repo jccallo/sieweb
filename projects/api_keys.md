@@ -115,20 +115,26 @@ CREATE TABLE api_keys (
     abilities BLOB SUB_TYPE 1 SEGMENT SIZE 80 NOT NULL,
     last_used_at TIMESTAMP,
     expires_at TIMESTAMP,
-    is_active SMALLINT DEFAULT 1 NOT NULL,
     created_by BIGINT,
+
+    deactivated_at TIMESTAMP,
     revoked_at TIMESTAMP,
+
     rate_limit INT DEFAULT 60 NOT NULL,    -- máximo requests por ventana
     window_seconds INT DEFAULT 60 NOT NULL, 
+
     allowed_ips BLOB SUB_TYPE 1 SEGMENT SIZE 80,
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     CONSTRAINT uq_key_hash UNIQUE (key_hash)
 );
 
 -- Índices recomendados
 CREATE INDEX idx_owner ON api_keys(owner_type, owner_id);
-CREATE INDEX idx_active ON api_keys(is_active);
+CREATE INDEX idx_key_valid ON api_keys(key_hash, revoked_at, deactivated_at);
+
 ```
 
 propuesta de rate limit en memoria

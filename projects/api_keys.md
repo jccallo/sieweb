@@ -116,7 +116,7 @@ CREATE TABLE api_keys (
     is_active SMALLINT DEFAULT 1 NOT NULL,
     created_by BIGINT,
     revoked_at TIMESTAMP,
-    rate_limit INT,                       -- máximo requests por ventana
+    rate_limit INT DEFAULT 60 NOT NULL,    -- máximo requests por ventana
     window_seconds INT DEFAULT 60 NOT NULL, 
     request_count INT DEFAULT 0 NOT NULL,  -- contador actual (OPCIONAL)
     window_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, -- inicio de ventana (OPCIONAL)

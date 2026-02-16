@@ -40,6 +40,8 @@ CREATE TABLE api_keys (
     INDEX idx_expires_at (expires_at)
 );
 
+request_count INT DEFAULT 0 NOT NULL,  -- contador actual (OPCIONAL)
+window_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, -- inicio de ventana (OPCIONAL)
 ```
 Mejorado api_keys
 ```sql
@@ -118,8 +120,6 @@ CREATE TABLE api_keys (
     revoked_at TIMESTAMP,
     rate_limit INT DEFAULT 60 NOT NULL,    -- máximo requests por ventana
     window_seconds INT DEFAULT 60 NOT NULL, 
-    request_count INT DEFAULT 0 NOT NULL,  -- contador actual (OPCIONAL)
-    window_start TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, -- inicio de ventana (OPCIONAL)
     allowed_ips BLOB SUB_TYPE 1 SEGMENT SIZE 80,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP,

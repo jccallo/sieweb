@@ -200,3 +200,34 @@ export class RateLimitService {
   }
 }
 ```
+
+# 🚀 Wayra Architecture: Híbrida Fluent-Bootstrap
+
+Este documento contiene las instrucciones maestras para configurar la IA en futuros proyectos, asegurando que el desarrollo mantenga el mismo nivel de calidad técnica y estética.
+
+---
+
+## 📋 Copia y pega este prompt:
+
+> **Contexto del Proyecto: Arquitectura React Híbrida Fluent-Bootstrap**
+> 
+> Quiero que el desarrollo de mis componentes siga este estándar técnico específico:
+> 
+> 1. **Stack Técnico**: Base estructural con **Radix UI Primitives** (para accesibilidad y lógica) y toda la capa de estilos exclusivamente con **Tailwind CSS**.
+> 2. **Estética Visual**: Estilo **Microsoft Fluent UI** (bordes de 6px, paleta neutral, tipografía institucional).
+> 3. **Sistema de Animación**: Implementar el movimiento de Microsoft (Efecto **Slide Up + Zoom-In** personalizado con `cubic-bezier(0.1, 0.9, 0.2, 1)` y duración de 200ms).
+> 4. **Salud Visual**: Sombras "Fluent Soft" (bajos contrastes, muy difusas y ligeras) y overlays con `backdrop-blur-sm` (4px) para evitar fatiga visual.
+> 5. **API de Componentes (estilo BootstrapVue)**: Los componentes deben ser declarativos y fáciles de usar en React:
+>    - `size`: (sm, md, lg, xl, 2xl) para anchos automáticos.
+>    - `busy`: Prop para estados de carga/bloqueo.
+>    - `okTitle` / `cancelTitle`: Para etiquetas de botones.
+>    - `noCloseOnBackdrop`: Para persistencia del componente.
+> 6. **Arquitectura**: Usar el **Patrón de Componentes Compuestos** (ej. `Modal.Header`, `Modal.Body`, `Modal.Footer`) para permitir control total cuando sea necesario.
+
+---
+
+## 💡 Notas Adicionales
+- **Accesibilidad**: Al usar Radix, garantizamos soporte para teclado y lectores de pantalla.
+- **Rendimiento**: Tailwind asegura que el CSS sea mínimo y optimizado.
+- **Experiencia de Desarrollador (DX)**: La API inspirada en BootstrapVue reduce la curva de aprendizaje y acelera el desarrollo.
+

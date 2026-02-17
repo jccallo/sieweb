@@ -222,7 +222,9 @@ Este documento contiene las instrucciones maestras para configurar la IA en futu
 >    - `busy`: Prop para estados de carga/bloqueo.
 >    - `okTitle` / `cancelTitle`: Para etiquetas de botones.
 >    - `noCloseOnBackdrop`: Para persistencia del componente.
-> 6. **Arquitectura**: Usar el **Patrón de Componentes Compuestos** (ej. `Modal.Header`, `Modal.Body`, `Modal.Footer`) para permitir control total cuando sea necesario.
+>    - `state`: (true/false/null) Para estados de validación (estilo BootstrapVue).
+> 6. **Responsabilidad Única (Atomicity)**: Cada componente, método o utilidad debe hacer **una sola cosa y bien clara**. Si un componente crece demasiado, debe dividirse en sub-componentes especializados.
+> 7. **Arquitectura**: Usar el **Patrón de Componentes Compuestos** (ej. `Modal.Header`, `Modal.Body`, `Modal.Footer`) para permitir control total cuando sea necesario.
 
 ---
 
@@ -230,4 +232,5 @@ Este documento contiene las instrucciones maestras para configurar la IA en futu
 - **Accesibilidad**: Al usar Radix, garantizamos soporte para teclado y lectores de pantalla.
 - **Rendimiento**: Tailwind asegura que el CSS sea mínimo y optimizado.
 - **Experiencia de Desarrollador (DX)**: La API inspirada en BootstrapVue reduce la curva de aprendizaje y acelera el desarrollo.
+
 

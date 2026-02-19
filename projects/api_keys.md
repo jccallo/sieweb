@@ -211,7 +211,7 @@ CREATE TABLE api_keys (
     owner_name     VARCHAR(255) NOT NULL,
     name           VARCHAR(255) NOT NULL,
     key_hash       CHAR(64) NOT NULL,
-    abilities      BLOB SUB_TYPE 1 SEGMENT SIZE 80 NOT NULL,
+    abilities      BLOB SUB_TYPE 1 SEGMENT SIZE 80,
     last_used_at   TIMESTAMP,
     expires_at     TIMESTAMP,
     created_by     BIGINT,
